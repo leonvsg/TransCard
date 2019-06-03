@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,10 +31,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         codeImageView = findViewById(R.id.codeImage);
         button = findViewById(R.id.button);
-
+        tesseractTextView = findViewById(R.id.result);
         button.setActivated(false);
+        button.setOnClickListener(v -> {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
+            tesseractTextView.setText(tesseract.convert(bitmap));
+        });
 
         tesseract = new CaptchaRecognition(this);
         httpClient = new HttpClient();
@@ -49,20 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                model = parser.parseCardRequstModel(response.body().string());
+                model = parser.parseCardRequestModel(response.body().string());
                 setCodeImageAndActivateButton(model.getCheckCodeUri());
-            }
-        });
-
-
-
-        tesseractTextView = findViewById(R.id.result);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
-                tesseractTextView.setText(tesseract.convert(bitmap));
             }
         });
     }
