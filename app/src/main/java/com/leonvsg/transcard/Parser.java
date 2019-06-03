@@ -7,7 +7,7 @@ public class Parser {
 
     public CardRequestModel parseCardRequestModel(String htmlString){
 
-        Document html = Jsoup.parse(htmlString);
+        //Document html = Jsoup.parse(htmlString);
 
 
         return new CardRequestModel("4102280055",

@@ -50,7 +50,8 @@
         android:layout_gravity="center"
         android:layout_margin="50dp"
         android:padding="10dp"
-        android:text="Проверить баланс"/>
+        android:text="Проверить баланс"
+        android:enabled="false"/>
 
     <TextView
         android:id="@+id/balance"

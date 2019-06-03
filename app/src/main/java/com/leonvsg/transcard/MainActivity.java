@@ -32,23 +32,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        tesseract = new CaptchaRecognition(this);
+        httpClient = new HttpClient();
+        parser = new Parser();
+
         codeImageView = findViewById(R.id.codeImage);
         button = findViewById(R.id.button);
         tesseractTextView = findViewById(R.id.result);
-        button.setActivated(false);
+
         button.setOnClickListener(v -> {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
             tesseractTextView.setText(tesseract.convert(bitmap));
         });
 
-        tesseract = new CaptchaRecognition(this);
-        httpClient = new HttpClient();
-        parser = new Parser();
-
         httpClient.run(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                codeImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.placeholder_error));
             }
 
             @Override
@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCodeImageAndActivateButton(String imageUri){
-        Picasso.with(this).load(imageUri).into(codeImageView);
-        button.setActivated(true);
+        Picasso picasso = Picasso.with(this);
+        picasso.setIndicatorsEnabled(true);
+        picasso.load(imageUri).placeholder(R.drawable.placeholder).error(R.drawable.placeholder_error).into(codeImageView);
+        button.setEnabled(true);
     }
 }
