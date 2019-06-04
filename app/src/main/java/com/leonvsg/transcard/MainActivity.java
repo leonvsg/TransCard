@@ -7,18 +7,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CaptchaRecognition tesseract;
+    //private CaptchaRecognition tesseract;
     private HttpClient httpClient;
     private Parser parser;
     private CardRequestModel model;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tesseract = new CaptchaRecognition(this);
+        //tesseract = new CaptchaRecognition(this);
         httpClient = new HttpClient();
         parser = new Parser();
 
@@ -40,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         tesseractTextView = findViewById(R.id.result);
 
-        button.setOnClickListener(v -> {
+        /*button.setOnClickListener(v -> {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
             tesseractTextView.setText(tesseract.convert(bitmap));
-        });
+        });*/
 
         httpClient.run(new Callback() {
             @Override

@@ -11,8 +11,20 @@ public class CardRequestModel {
     private String Button2;
     private String checkCodeUri;
 
-    public CardRequestModel(String cardnum, String __VIEWSTATE, String __EVENTVALIDATION, String checkCodeUri) {
+    public CardRequestModel(String __VIEWSTATE, String __EVENTVALIDATION, String checkCodeUri) {
         this.cardnum = "4102280055";
+        this.checkcode = "1234";
+        this.cardnum = cardnum;
+        this.__VIEWSTATE = __VIEWSTATE;
+        this.__EVENTVALIDATION = __EVENTVALIDATION;
+        this.__EVENTTARGET = "";
+        this.__EVENTARGUMENT = "";
+        Button2 = "Выполнить запрос";
+        this.checkCodeUri = checkCodeUri;
+    }
+
+    public CardRequestModel(String cardnum, String __VIEWSTATE, String __EVENTVALIDATION, String checkCodeUri) {
+        this.cardnum = cardnum;
         this.checkcode = "1234";
         this.cardnum = cardnum;
         this.__VIEWSTATE = __VIEWSTATE;
@@ -85,5 +97,19 @@ public class CardRequestModel {
 
     public void setCheckCodeUri(String checkCodeUri) {
         this.checkCodeUri = checkCodeUri;
+    }
+
+    @Override
+    public String toString() {
+        return "CardRequestModel{" +
+                "checkcode='" + checkcode + '\'' +
+                ", cardnum='" + cardnum + '\'' +
+                ", __VIEWSTATE='" + __VIEWSTATE + '\'' +
+                ", __EVENTVALIDATION='" + __EVENTVALIDATION + '\'' +
+                ", __EVENTTARGET='" + __EVENTTARGET + '\'' +
+                ", __EVENTARGUMENT='" + __EVENTARGUMENT + '\'' +
+                ", Button2='" + Button2 + '\'' +
+                ", checkCodeUri='" + checkCodeUri + '\'' +
+                '}';
     }
 }
